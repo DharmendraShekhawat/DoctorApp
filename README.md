@@ -1,4 +1,4 @@
-# <h1 align = "center"> User Management System Using Spring_Boot </h1>
+# <h1 align = "center"> Dr. Appointment Booking Application Using Spring_Boot </h1>
 ___ 
 <p align="center">
 <a href="Java url">
