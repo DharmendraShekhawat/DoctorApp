@@ -1,101 +1,113 @@
-# <h1 align = "center"> Dr. Appointment Booking Application Using Spring_Boot </h1>
+
+___
+# Project Name
+Doctor App ( Hospital Management System )
+
+ ![Dr](https://github.com/DharmendraShekhawat/DoctorApp/assets/142703677/cf2d32d1-c5e1-4fff-9f76-9f2a6b888844)
+
+# Frameworks and Language Used
+**Spring Boot** 2.1.0
+**Java** 20.0
+**Maven** 3.8.1
+
+# Data Flow
+The following functions are used in the data flow of this project:
+
+
+## Models
+
+**Patient:**
+
+Attributes: patientId, patientFirstName, patientLastName, patientEmail, patientPassword, patientContact.
+Represents a patient in the hospital management system.
+Has a one-to-one relationship with the Appointment entity.
+
+**Doctor:**
+
+Attributes: doctorId, doctorName, doctorExperience, doctorSpecialization, doctorContact.
+Represents a doctor in the hospital management system.
+Has a one-to-many relationship with the Appointment entity.
+Enum Specialization represents the specialization of the doctor.
+
+**AuthenticationToken:**
+
+Attributes: tokenId, token, tokenCreationDate, patient.
+Represents an authentication token for a patient in the hospital management system.
+Has a one-to-one relationship with the Patient entity.
+Generates a random unique identifier (UUID) for the token.
+
+**AppointmentKey:**
+
+Represents the composite key for the Appointment entity.
+Attributes: appointmentId, appointmentTime.
+Used as an embedded key in the Appointment entity.
+
+**Appointment:**
+
+Attributes: id, doctor, patient.
+Represents an appointment in the hospital management system.
+Uses the composite key AppointmentKey as the primary key.
+Has a many-to-one relationship with the Doctor entity and a one-to-one relationship with the Patient entity.
+
+**Specialization (Enum):**
+
+Represents the specialization of a doctor in the hospital management system.
+Possible values: NEUROLOGIST, CARDIOLOGIST, GYNECOLOGIST, DERMATOLOGIST.
+
+## Controller
+
+
+PatientController:
+
+/signup (POST): Handles the signup process for patients. Expects a SignUpInput object in the request body and returns a SignUpOutput object.
+/signin (POST): Handles the signin process for patients. Expects a SignInInput object in the request body and returns a SignInOutput object.
+/doctors (GET): Retrieves a list of all doctors. Expects the userEmail and token as query parameters. Returns a ResponseEntity containing the list of Doctor objects.
+
+DoctorController:
+
+/doctor/add (POST): Adds a new doctor to the system. Expects a Doctor object in the request body. Returns a string indicating the result of the addition.
+
+
+## Services
+
+**AppointmentService**:
+
+Manages the appointment-related operations.
+Autowires the IAppointmentRepo repository.
+
+**DoctorService**:
+
+Manages the doctor-related operations.
+Autowires the IDoctorRepo repository.
+Provides methods to add a doctor and retrieve all doctors.
+
+
+**PatientService**:
+
+Manages the patient-related operations.
+Autowires the PatientRepository, AuthenticationService, and DoctorService.
+Provides methods for patient signup and signin.
+Performs password encryption using MD5.
+Retrieves and validates patient information.
+Generates and saves authentication tokens.
+Invokes the DoctorService to fetch all doctors.
+
+**AuthenticationService**:
+
+Manages the authentication-related operations.
+Autowires the ITokenRepo repository.
+Provides methods to save and retrieve authentication tokens.
+Performs authentication checks based on the user's email and token.
 
 
 
-___ ![Dr](https://github.com/DharmendraShekhawat/DoctorApp/assets/142703677/cf2d32d1-c5e1-4fff-9f76-9f2a6b888844)
 
-<p align="center">
-<a href="Java url">
-    <img alt="Java" src="https://img.shields.io/badge/Java->=8-darkblue.svg" />
-</a>
-<a href="Maven url" >
-    <img alt="Maven" src="https://img.shields.io/badge/maven-3.1.3-brightgreen.svg" />
-</a>
-<a href="Spring Boot url" >
-    <img alt="Spring Boot" src="https://img.shields.io/badge/Spring Boot-3.0.6-brightgreen.svg" />
-</a>
-</p>
-
----
-
-<p align="left">
-
-<!-- Project Description -->
-## Overview
-<p align="center">This project, named "Restaurant Model," is a robust Spring Boot application designed for managing user data efficiently. It provides a set of API endpoints that allow you to perform various operations on user records, such as adding, retrieving, updating, and deleting user information. 
-</p>
-
-<!-- Table of Contents -->
-## Table of Contents
-1. [Technologies Used](#technologies-used)
-2. [Key Features](#key-features)
-3. [Usage](#usage)
-4. [API reference](#api-reference)
-5. [License](#license)
-6. [Acknowledgments](#acknowledgments)
-7. [Contact](#contact)
-
-<!-- Technologies Used -->
-## Technologies Used
-- Java 20
-- Spring Boot
-- Spring Web Initializer
-- Maven
-- Spring Web Dependency
-- Lombok
-- Validation
+_**Repository:**_ The repository layer is responsible for interacting with the database. It uses Spring Data JPA to perform CRUD (create, read, update, delete) operations on entities.
 
 
-<!-- Key Features -->
-## Key Features
-- Add Restaurant
-- Add List of Restaurant
-- Get Restaurant
-- Get All Restaurant
-- Get Restaurant Details By RestaurantId
-- Delete Restaurant By RestaurantId.
-- Update Restaurant by RestaurantId
+# Database Structure Used
+I have used MySql as Database.
 
-<!-- Usage -->
-## Usage
-- Access the application at `http://localhost:8080`.
-- Use the provided API endpoints to manage your User Management.
-
-### Controller:
-- It consists of a class named APIController which basically controls the flow of data.
-- @RestController annotation is used to make the APIController as a controller layer.
-- We perform the CRUD operations such as @PostMapping , @GetMapping , @PutMapping , @DeleteMapping.
-
-### API Reference
-
-#### Add Restaurant :
-POST Method :  http://localhost:8080/restaurant
-
-
-#### Get All Restaurant :
- - GET Method : http://localhost:8080/allRestaurant
-
- #### GET Restaurant By ID :
- - GET Method :   http://localhost:8080/restaurant/{restaurantId}
-
-#### GET All Restaurant :
- - GET Method :   http://localhost:8080/allrestaurants
-
- #### DELETE Restaurant :
- - DELETE Method :   http://localhost:8080/restaurant/delete/{restaurantId}
-
-  #### Update Restaurant Details :
- - PUT Method :   http://localhost:8086/restaurant/update
-
-
-
-
- <!-- Acknowledgments -->
-## Acknowledgments
-- Thank you to the Spring Boot and Java communities for providing excellent tools and resources.
-
-<!-- Contact -->
-## Contact
 For questions or feedback, please contact : Dharmendra Singh Shekhawat  
 - Maild Id : dharmendrashekhawat1403@gmail.com
 
